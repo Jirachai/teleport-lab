@@ -1,3 +1,4 @@
+![alt text](https://github.com/Jirachai/teleport-lab/blob/c599af61d78cf406ff02a33c0c68e1092fc53848/teleport-connect.png)
 # Manage all your SSH servers with teleport
 How to set up an SSH proxy server with gravitational teleport to manage all your SSH connections from a web interface. Supports 2FA two-factor authentication, multiple users, monitoring, and logging of SSH sessions. Install on DigitalOcean Cloud and manage via letsencrypt load balancer certs.
 
