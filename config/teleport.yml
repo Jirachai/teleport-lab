@@ -1,0 +1,36 @@
+teleport:
+    nodename: 192.168.1.108
+    data_dir: /var/lib/teleport
+    auth_token: teleport@123
+    auth_servers:
+    - 127.0.0.1:3025
+    log:
+        output: stderr
+        severity: INFO
+    ca_pin: sha256:ca-pin-hash-goes-here
+auth_service:
+    enabled: "yes"
+    listen_addr: 0.0.0.0:3025
+    public_addr: 192.168.1.108:3025
+    tokens:
+    - proxy,node:teleport@123
+    license_file: /path/to/license-if-using-teleport-enterprise.pem
+ssh_service:
+    enabled: "yes"
+    labels:
+        db_role: master
+        db_type: postgres
+    commands:
+    - name: hostname
+      command: [/usr/bin/hostname]
+      period: 1m0s
+    - name: arch
+      command: [/usr/bin/uname, -p]
+      period: 1h0m0s
+proxy_service:
+    enabled: "yes"
+    listen_addr: 0.0.0.0:3023
+    public_addr: 192.168.1.108
+    ssh_public_addr: 192.168.1.108
+    web_listen_addr: 0.0.0.0:3080
+    tunnel_listen_addr: 0.0.0.0:3024
