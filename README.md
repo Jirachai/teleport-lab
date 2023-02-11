@@ -172,6 +172,7 @@ Now, we will create a user on the teleport auth server. Every teleport user shou
 
 ```bash
 docker-compose exec teleport tctl users add teleport root,xcad,christian,vagrant
+tctl users add testuser --roles=editor,access --logins=root,ubuntu
 ```
 
 With this command, I will add a new user called `teleport` who can log in with the Linux users `root`, `xcad`, `christian`, and `vagrant` on the nodes.
@@ -205,21 +206,21 @@ I also create a new configuration file `/etc/teleport.yaml` and add the followin
 **Example teleport.yml**:
 ```yml
 teleport:
-    nodename: teleport-node-1
-    data_dir: /var/lib/teleport
-    auth_token: <your-auth-token>
-    auth_servers:
-        - <your-fqdn>:3025
-    log:
+  nodename: teleport-node-1
+  data_dir: /var/lib/teleport
+  auth_token: <your-auth-token>
+  auth_servers:
+    - <your-fqdn>:3025
+  log:
     output: stderr
     severity: INFO
     ca_pin: <your-ca-pin-hash>
 auth_service:
-    enabled: no
+  enabled: no
 ssh_service:
-    enabled: yes
+  enabled: yes
 proxy_service:
-    enabled: no
+  enabled: no
 ```
 
 *Note: If your node doesn't show up with the correct public IP address in your teleport server, you can manually enforce this by adding the attribute to the `teleport:` section in the configuration file.*
@@ -233,7 +234,7 @@ advertise_ip: <servers-public-ip>
 Now we can simply start the teleport service with the command:
 
 ```bash
-sudo systemctl enable –now teleport
+sudo systemctl enable –-now teleport
 ```
 
 If everything works successfully, you should be able to see the new node in the teleport proxy server.
