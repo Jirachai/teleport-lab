@@ -2,7 +2,7 @@ version: '2'
 
 services:
   configure:
-    image: quay.io/gravitational/teleport:4.3
+    image: quay.io/gravitational/teleport:12
     container_name: teleport-configure
     entrypoint: /bin/sh
     hostname: 192.168.1.108
@@ -11,7 +11,7 @@ services:
       - ./config:/etc/teleport
 
   teleport:
-    image: quay.io/gravitational/teleport:4.3
+    image: quay.io/gravitational/teleport:12
     container_name: teleport
     entrypoint: /bin/sh
     hostname: 192.168.1.108

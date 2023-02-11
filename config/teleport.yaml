@@ -1,0 +1,45 @@
+#
+# Sample Teleport configuration file
+# Creates a single proxy, auth and node server.
+#
+# Things to update:
+#  1. ca_pin: Obtain the CA pin hash for joining more nodes by running 'tctl status'
+#     on the auth server once Teleport is running.
+#  2. license-if-using-teleport-enterprise.pem: If you are an Enterprise customer,
+#     obtain this from https://dashboard.gravitational.com/web/
+#
+teleport:
+  nodename: 192.168.1.108
+  data_dir: /var/lib/teleport
+  auth_token: 2005b6f6e3bb196b1e6511a14fad34cc0de7bef8e5de892f
+  auth_servers:
+  - 127.0.0.1:3025
+  log:
+    output: stderr
+    severity: INFO
+  ca_pin: sha256:ca-pin-hash-goes-here
+auth_service:
+  enabled: "yes"
+  listen_addr: 0.0.0.0:3025
+  public_addr: 192.168.1.108
+  tokens:
+  - proxy,node:2005b6f6e3bb196b1e6511a14fad34cc0de7bef8e5de892f
+  license_file: /path/to/license-if-using-teleport-enterprise.pem
+ssh_service:
+  enabled: "yes"
+  labels:
+    db_role: master
+    db_type: postgres
+  commands:
+  - name: hostname
+    command: [/usr/bin/hostname]
+    period: 1m0s
+  - name: arch
+    command: [/usr/bin/uname, -p]
+    period: 1h0m0s
+proxy_service:
+  enabled: "yes"
+  listen_addr: 0.0.0.0:3023
+  web_listen_addr: 0.0.0.0:3080
+  tunnel_listen_addr: 0.0.0.0:3024
+
