@@ -1,0 +1,16 @@
+teleport:
+  nodename: hetzner-do-01
+  data_dir: /var/lib/teleport
+  auth_token: a1d376e7f762afab3b973afcc4d1e5f8
+  auth_servers:
+    - 65.108.89.131:3025
+  log:
+    output: stderr
+    severity: INFO
+  ca_pin: sha256:e77c1b021d675888650979fe7ae9b14ad2ec237bc64cdc4c8e20e90509ac0c3f
+auth_service:
+  enabled: no
+ssh_service:
+  enabled: yes
+proxy_service:
+  enabled: no
