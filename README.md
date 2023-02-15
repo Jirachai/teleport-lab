@@ -1,4 +1,16 @@
 ![alt text](https://github.com/Jirachai/teleport-lab/blob/c599af61d78cf406ff02a33c0c68e1092fc53848/teleport-connect.png)
+# port management
+
+3080 : web listen address
+
+3023 : listen address
+
+3024 : tunnel listen address
+
+3025 : listen address 
+
+3022 : node connection
+
 # Manage all your SSH servers with teleport
 How to set up an SSH proxy server with gravitational teleport to manage all your SSH connections from a web interface. Supports 2FA two-factor authentication, multiple users, monitoring, and logging of SSH sessions. Install on DigitalOcean Cloud and manage via letsencrypt load balancer certs.
 
@@ -263,3 +275,10 @@ ssh_service:
 proxy_service:
     enabled: no
 ```
+# Add new user to teleport
+
+Add new user via Teleport web UI via Management > Create New User and sent new invite to user.
+
+After that set login role via access cluster and run command 
+
+tctl user update (Account Name) --set-logins=root
